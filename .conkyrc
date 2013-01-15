@@ -1,4 +1,4 @@
-# ..conkyd - Edited from various examples across the 'net
+# .conkyrc - Edited from various examples across the 'net
 # Used by Craig Watson [ www.cwatson.org ] on Fedora 8
 
 # --- Window Layout & Options --- #
@@ -39,8 +39,8 @@ ${color white}Kernel$color  $kernel ${alignr}${color white}Arch$color $machine
 ${color orange}CPU ${hr 2}$color
 ${font Arial:bold:size=8}${color #ff9999}${execi 99999 cat /proc/cpuinfo | grep "model name" -m1 | cut -d":" -f2 | cut -d" " -f2- | sed 's#Processor ##'}$font$color
 ${color white}Freq:$color ${execi 20 sensors |grep "Core0 Temp" | cut -d" " -f4}$font$color$alignr${freq_g 2}GHz ${color #c0ff3e}${execi 20 sensors |grep "Core1 Temp" | cut -d" " -f4}  $color${alignr}${color white}Processes:$color $running_processes/ $processes
-${cpugraph cpu1 25,120 000000 ff6600 } ${cpugraph cpu2 25,120 000000 cc0033}
-${color #ff6600}${cpubar cpu1 3,120} ${color #cc0033}${cpubar cpu2 3,120}$color
+${cpugraph cpu1 25,140 000000 ff6600 } ${cpugraph cpu2 25,140 000000 cc0033}
+# ${color #ff6600}${cpubar cpu1 3,120} ${color #cc0033}${cpubar cpu2 3,120}$color
 
 ${color orange}TOP 9 PROCESSES ${hr 2}$color
 ${color #ff9999}NAME               PID      CPU      MEM
@@ -62,13 +62,8 @@ ${color orange}DRIVES - FREE SPACE ${hr 2}$color
 ${color white}Fedora$color  ${fs_free_perc /}%$alignr${fs_free /}/ ${fs_size /}
 ${fs_bar 3 /}$color 
 
-${color orange}ETHERNET (${addr wlan0}) ${hr 2}$color
-${color white}Down:$color  ${downspeed wlan0} KB/s${alignr}${color white}Up:$color ${upspeed wlan0} KB/s
-${downspeedgraph wlan0 25,120 000000 00ff00} ${alignr}${upspeedgraph wlan0 25,120 000000 ff0000}$color
+${color orange}ETHERNET (${addr p4p1}) ${hr 2}$color
+${color white}Down:$color ${downspeedf p4p1} k/s${alignr}${totaldown p4p1} total
+${color white}  Up:$color ${upspeedf   p4p1} k/s${alignr}${totalup   p4p1} total
+${downspeedgraph p4p1 25,140 000000 00ff00} $color ${alignr}${upspeedgraph p4p1 25,140 000000 ff0000} $color
 
-#${color white}WEATHER ${hr 1}${color}
-#${execi 600 curl -s --connect-timeout 30 "http://wap.weather.com.cn/data/sk/101280601.html" >/tmp/current }${execi 6000 curl -s --connect-timeout 30 "http://m.weather.com.cn/data/101010100.html" >/tmp/forcast }
-#${voffset -29}${goto 32}${execi 600 sed  's/^.*"city":"//' /tmp/current | sed 's/",".*$//' }: ${color1}${execi 600 sed  's/^.*"img_title_single":"//' /tmp/forcast | sed 's/",".*$//' } ${execi 600 sed  's/^.*"temp":"//' /tmp/current | sed 's/",".*$//' }°C ${execi 600 sed  's/^.*"WD":"//' /tmp/current | sed 's/",".*$//' }, ${execi 600 sed  's/^.*"time":"//' /tmp/current | sed 's/",".*$//' }${color} 
-#${goto 32}${font Monospace:size=10:weight=bold}Today: ${color1}${execi 600 sed  's/^.*"weather1":"//' /tmp/forcast | sed 's/",".*$//' } ${execi 600 sed  's/^.*"temp1":"//' /tmp/forcast | sed 's/",".*$//' }${color}${font}
-#${goto 32}${font Monospace:size=10:weight=bold}Tomorrow: ${color1}${execi 600 sed  's/^.*"weather2":"//' /tmp/forcast | sed 's/",".*$//' } ${execi 600 sed  's/^.*"temp2":"//' /tmp/forcast | sed 's/",".*$//' }${color}${font}
-#${goto 32}${font Monospace:size=10:weight=bold}Today+2: ${color1}${execi 600 sed  's/^.*"weather3":"//' /tmp/forcast | sed 's/",".*$//' } ${execi 600 sed  's/^.*"temp3":"//' /tmp/forcast | sed 's/",".*$//' }${color}${font}
