@@ -1,5 +1,5 @@
-# .conkyrc - Edited from various examples across the 'net
-# Used by Craig Watson [ www.cwatson.org ] on Fedora 8
+# .conkyrc
+# on Fedora 17
 
 # --- Window Layout & Options --- #
 own_window yes
