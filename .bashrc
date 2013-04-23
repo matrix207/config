@@ -14,8 +14,34 @@ alias img='/usr/bin/shotwell'
 alias blog='jekyll --server'
 alias ekey='xmodmap ~/.xmodmap'
 alias vboxsetup='/etc/init.d/vboxdrv setup'
-grepstr() { grep -r -l "$1" . ;}
-grepsrc() { grep -r -l --include=*.{h,c}  "$1" . ;}
+
+# Functions
+
+sh-findpy() { find . -name '*.py' -exec grep -nHr "$1" {} \; ; }
+
+sh-grepstr() { 
+	search_path="$2";
+	if [ $# -lt 2 ]; then
+		search_path="."
+	fi
+	grep -r -l "$1" $search_path
+}
+
+sh-grepsrc() { 
+	search_path="$2";
+	if [ $# -lt 2 ]; then
+		search_path="."
+	fi
+	grep -r -l --include=*.{h,c,cpp,sh,py,pl}  "$1" $search_path
+}
+
+sh-sumsrcsize() {
+	search_path="$1";
+	if [ $# -lt 1 ]; then
+		search_path="."
+	fi
+	find $search_path \( -name "*.h" -or -name "*.c" -or -name "*.cpp" \) -printf %k"\n" | awk '{ sum += $1 } END { print sum "k"}'
+}
 
 export EDITOR=gvim
 
