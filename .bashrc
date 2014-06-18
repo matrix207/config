@@ -43,6 +43,20 @@ sh-sumsrcsize() {
 	find $search_path \( -name "*.h" -or -name "*.c" -or -name "*.cpp" \) -printf %k"\n" | awk '{ sum += $1 } END { print sum "k"}'
 }
 
+# enable color support of ls and also add handy aliases
+#if [ "$TERM" != "dumb" ]; then
+#    eval "`dircolors -b`"
+#    alias ls='ls -bF --color=always'
+#fi
+
+# Disable touchpad, 0:disable, 1:enable
+touchpad_set() {
+    state=$1
+    # cut by tab character -d$'\t'
+    id=`xinput list |grep TouchPad |cut -d'=' -f2 |cut -d$'\t' -f1`
+    xinput set-prop $id "Device Enabled" $state
+}
+
 export EDITOR=gvim
 
 # Source global definitions
