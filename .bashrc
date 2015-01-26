@@ -14,6 +14,7 @@ alias img='/usr/bin/shotwell'
 alias blog='jekyll --server'
 alias ekey='xmodmap ~/.xmodmap'
 alias vboxsetup='/etc/init.d/vboxdrv setup'
+alias ddprog='while killall -USR1 dd; do sleep 5; done'
 
 # Functions
 
