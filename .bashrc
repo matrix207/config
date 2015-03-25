@@ -44,6 +44,14 @@ sh-sumsrcsize() {
 	find $search_path \( -name "*.h" -or -name "*.c" -or -name "*.cpp" \) -printf %k"\n" | awk '{ sum += $1 } END { print sum "k"}'
 }
 
+sh-ipscan() {
+	local ipaddr="$1";
+	if [ $# -lt 1 ]; then
+		ipaddr="192.168.1.1"
+	fi
+	nmap -v -sn $ipaddr/24 |grep 'report' |grep -v 'down' |awk '{print $NF}'
+}
+
 # enable color support of ls and also add handy aliases
 #if [ "$TERM" != "dumb" ]; then
 #    eval "`dircolors -b`"
